@@ -6,12 +6,21 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 # Constructor
 		public function __construct() {
+			// Plugin vars
+			$this->pluginDir		= basename(dirname(__FILE__));
+			$this->pluginPath		= WP_PLUGIN_DIR . '/' . $this->pluginDir;
+			$this->pluginUrl 		= WP_PLUGIN_URL.'/'.$this->pluginDir;
+
 			// Module options
 			$opts = array(
+				// Plugin Url
+				'url' => $this->pluginUrl,
+				// Default View
+				'view' => $this->pluginPath.'/view.php',
 				// Description
 				'description' => __('Display a list of posts with category and keyword search.', 'carrington-build'),
 				// Icon
-				'icon' => 'loop-searchable/icon.png'
+				'icon' => $this->pluginUrl.'/icon.png'
 			);
 
 			// Register new query vars
