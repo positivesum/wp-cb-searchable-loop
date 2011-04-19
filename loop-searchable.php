@@ -183,26 +183,25 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 		 * @return string
 		 */
 		private function admin_form_post_categories($data) {
-			$out = '
-				<label for="'.$this->id_base.'-post_category">Category: </label>
-				<select class="post_category-dropdown" name="'.$this->get_field_id('post_category').'" id="'.$this->get_field_id('post_category').'">
-					<option value="0">Select Category</option>
-					<optgroup label="Categories">
-			';
-
-			$options = $this->get_post_categories();
 			$value = $data[$this->get_field_name('post_category')];
 
-			foreach ($options as $option) {
-				$selected = '';
-				if ($value == $option->term_id) {
-					$selected = 'selected';
-				}
+			$out = '<label for="'.$this->id_base.'-post_category">Category: </label>';
 
-				$out .= '<option value="'.$option->term_id.'" '.$selected.'>'.$option->name.'</option>';
-			}
-
-			$out .= '</option></select>';
+			$out .= wp_dropdown_categories(
+				array(
+					 'id' => $this->get_field_id('post_category'),
+					 'selected' => $value,
+				     'hide_empty' => 0,
+					 'echo' => false,
+				     'hide_if_empty' => false,
+				     'taxonomy' => 'category',
+				     'name' => $this->get_field_id('post_category'),
+				     'orderby' => 'name',
+					 'class' => 'post_category-dropdown',
+				     'hierarchical' => true,
+				     'show_option_none' => __('Select Category')
+				)
+			);
 
 			return $out;
 		}
