@@ -24,17 +24,23 @@
 <?php endif; ?>
 <div class="cfct-loop-searchable-search-form">
 	<form action="" method="get">
-		<select class="category" name="category" id="cfct-loop-searchable-search-form-select">
-			<option value="0">Select Publication Category</option>
-			<?php foreach ($categories as $_category): ?>
-				<?php $selected = ''; ?>
-				<?php if ($_category->term_id == $category): ?>
-					<?php $selected = 'selected'; ?>
-				<?php endif; ?>
-				<option value="<?php echo $_category->term_id ?>" <?php echo $selected; ?>><?php echo $_category->name; ?></option>
-			<?php endforeach; ?>
-		</select>
-		<input class="submit" type="submit" value="Search">
+        <?php
+            echo wp_dropdown_categories(
+				array(
+					 'id' => 'cfct-loop-searchable-search-form-selec',
+					 'selected' => $category,
+				     'hide_empty' => 0,
+					 'echo' => false,
+				     'hide_if_empty' => false,
+				     'taxonomy' => 'category',
+				     'name' => 'category',
+				     'orderby' => 'name',
+					 'class' => 'category',
+				     'hierarchical' => true,
+				     'show_option_none' => __('Select Category')
+				)
+			);
+        ?>		<input class="submit" type="submit" value="Search">
 		<input class="keywords" type="text" name="keywords" value="<?php echo $keywords; ?>"  />
 	</form>
 </div>
