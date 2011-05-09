@@ -34,9 +34,9 @@
 					 'echo' => false,
 				     'hide_if_empty' => false,
 				     'taxonomy' => 'category',
-				     'name' => 'category '.$class_category,
+				     'name' => 'category',
 				     'orderby' => 'name',
-					 'class' => 'category',
+					 'class' => 'category '.$class_category,
 				     'hierarchical' => true,
 				     'show_option_none' => __('Select Category')
 				)
