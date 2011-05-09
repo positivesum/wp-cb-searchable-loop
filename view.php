@@ -63,7 +63,8 @@
                 }
             ?>
             <?php if ($file): ?>
-            <div class="attachments">
+
+            <div class="attachments-box">
                 <div class="file-view">
                     <a href="http://docs.google.com/viewer?url=<?php echo $file; ?>" target="_blank">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/ico-google.jpg" /><span>&nbsp;View document in browser</span>
