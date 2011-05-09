@@ -55,6 +55,27 @@
 			<div class="entry-content">
 					<?php the_excerpt(); ?>
 			</div>
+            <?php
+                if (count(get_post_custom_values('_attachment'))) {
+                    $file = WP_CONTENT_DIR.'/attachments/'.array_shift(get_post_custom_values('_attachment'));
+                } elseif (count(get_post_custom_values('file'))) {
+                    $file = array_shift(get_post_custom_values('file'));
+                }
+            ?>
+            <?php if ($file): ?>
+            <div class="attachments">
+                <div class="file-view">
+                    <a href="http://docs.google.com/viewer?url=<?php echo $file; ?>" target="_blank">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/ico-google.jpg" /><span>&nbsp;View document in browser</span>
+                    </a>
+                </div>
+                <div class="file-download">
+                    <a href="<?php echo $file; ?>" target="_blank">
+                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/ico-pdf.png" /><span>&nbsp;Download PDF</span>
+                    </a>
+                </div>
+            </div>
+            <?php endif; ?>
 		</div>
 	<?php endwhile; ?>
 <?php else: ?>
