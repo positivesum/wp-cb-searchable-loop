@@ -25,6 +25,7 @@
 <div class="cfct-loop-searchable-search-form">
 	<form action="" method="get">
         <?php
+            $class_category = (get_category($category)->parent > 0) ? get_category($category)->parent : $category;
             echo wp_dropdown_categories(
 				array(
 					 'id' => 'cfct-loop-searchable-search-form-selec',
@@ -33,7 +34,7 @@
 					 'echo' => false,
 				     'hide_if_empty' => false,
 				     'taxonomy' => 'category',
-				     'name' => 'category',
+				     'name' => 'category '.$class_category,
 				     'orderby' => 'name',
 					 'class' => 'category',
 				     'hierarchical' => true,
