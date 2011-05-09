@@ -57,7 +57,7 @@
 			</div>
             <?php
                 if (count(get_post_custom_values('_attachment'))) {
-                    $file = WP_CONTENT_DIR.'/attachments/'.array_shift(get_post_custom_values('_attachment'));
+                    $file = WP_CONTENT_URL.'/attachments/'.array_shift(get_post_custom_values('_attachment'));
                 } elseif (count(get_post_custom_values('file'))) {
                     $file = array_shift(get_post_custom_values('file'));
                 }
