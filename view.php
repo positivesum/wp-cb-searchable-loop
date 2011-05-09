@@ -79,6 +79,24 @@
             <?php endif; ?>
 		</div>
 	<?php endwhile; ?>
+    <?php
+        global $wp_query;
+
+        if ($wp_query->max_num_pages > 1) {
+        ?>
+        <div class="pagination">
+            <?php
+            previous_posts_link(__('Prev', 'carrington-business'));
+            next_posts_link(__('Next', 'carrington-business'));
+            cfct_page_x_of_y(array(
+                'before' => '<p>',
+                'after' => '</p>'
+            ));
+            ?>
+        </div>
+        <?php
+        }
+    ?>
 <?php else: ?>
 	<h2>Sorry, but we not found any post</h2>
 <?php endif; ?>
