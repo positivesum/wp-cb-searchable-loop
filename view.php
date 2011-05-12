@@ -28,7 +28,7 @@
             $class_category = (get_category($category)->parent > 0) ? get_category($category)->parent : $category;
             echo wp_dropdown_categories(
 				array(
-					 'id' => 'cfct-loop-searchable-search-form-selec',
+					 'id' => 'cfct-loop-searchable-search-form-select',
 					 'selected' => $category,
 				     'hide_empty' => 0,
 					 'echo' => false,
