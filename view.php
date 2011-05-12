@@ -20,7 +20,7 @@
 <?php endif; ?>
 
 <?php if (!empty($description)): ?>
-	<h2><?php echo $description; ?></h2>
+	<p class="description"><?php echo $description; ?></p>
 <?php endif; ?>
 <div class="cfct-loop-searchable-search-form">
 	<form action="" method="get">
