@@ -51,7 +51,6 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 # Display
 		public function display($data) {
-			global $wp_query;
 
 			// Module title
 			$title = esc_html($data[$this->get_field_id('title')]);
@@ -72,22 +71,26 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$keywords = get_query_var('keywords');
 
 			// Make new Query
+            
 			$query_string = array(
-				'orderby=date',
-				'order=DESC',
-				'paged='.$paged
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'paged' => $paged
 			);
 			if ($category) {
-				$query_string[] = 'cat='.$category;
+				$query_string['cat'] = $category;
 			}
 			if ($keywords) {
-				$query_string[] = 's='.$keywords;
+				$query_string['s'] = $keywords;
 			}
 			// Make query string
-			$query_string = implode('&', $query_string);
+			//$query_string = implode('&', $query_string);
 
 			// Make new WP_Query object
-			$wp_query = new WP_Query($query_string);
+			query_posts($query_string);
+
+            //$wp_query->query($query_string);
+            global $wp_query;
 
 			// Output
 			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords'));
