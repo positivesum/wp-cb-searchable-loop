@@ -99,6 +99,6 @@
         }
     ?>
 <?php else: ?>
-	<h2>Sorry, but we not found any post</h2>
+	<h2>No posts found in that category</h2>
 <?php endif; ?>
 
