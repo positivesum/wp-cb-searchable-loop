@@ -51,7 +51,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 # Display
 		public function display($data) {
-			global $wp_query;
+			global $wp_query, $post;
 
 			// Module title
 			$title = esc_html($data[$this->get_field_id('title')]);
@@ -73,6 +73,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 			// Make new Query
 			$query_string = array(
+                'posts_per_page=9',
 				'orderby=date',
 				'order=DESC',
 				'paged='.$paged

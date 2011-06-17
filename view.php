@@ -8,6 +8,9 @@
  * $query = object of WP_Query
  */
 ?>
+<pre>
+    <?php print_r($_SERVER); ?>
+</pre>
 <script type="text/javascript">
 	jQuery(function ($) {
 		$('#cfct-loop-searchable-search-form-select').change(function () {
