@@ -57,6 +57,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$title = esc_html($data[$this->get_field_id('title')]);
 			// Module description
 			$description = $data[$this->get_field_id('description')];
+            // Header form
+            $header_form = $data[$this->get_field_name('show_header_form')];
 
 			// Page
 			$paged = get_query_var('paged');
@@ -95,7 +97,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             global $wp_query;
 
 			// Output
-			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords'));
+			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords', 'header_form'));
 		}
 
 # Admin Form
