@@ -120,7 +120,20 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 			return $out;
 		}
-
+# Update
+        /**
+         * Update data, standard is to just return the new data
+         *
+         * @param array $new_data
+         * @param array $old_data
+         * @return array
+         */
+        function update($new_data, $old_data) {
+            if (empty($new_data[$this->get_field_name('show_header_form')])) {
+                $new_data[$this->get_field_name('show_header_form')] = 'off';
+            }
+            return $new_data;
+        }
 # Admin Helpers
 		public function admin_text($data) {
 			return strip_tags($data[$this->get_field_name('title')]);
