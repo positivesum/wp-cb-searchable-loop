@@ -109,6 +109,9 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Description - textarea
 			$out .= $this->admin_form_description($data);
 
+            // Show header form?
+            $out .= $this->admin_form_header_form($data);
+
 			// Post settings (type, category)
 			$out .= $this->admin_form_post_settings($data);
 
@@ -210,6 +213,18 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 			return $out;
 		}
+
+        // Settings for loop (posts per page, etc)
+        private function admin_form_loop_settings($data) {}
+
+        // Settings for header forms
+        private function admin_form_header_form($data) {
+            $out = '<label for="'.$this->id_base.'-show_header_form">Show Header Form: </label>';
+            $out .= '<input type="checkbox" name="'.$this->get_field_id('show_header_form').'" id="'.$this->get_field_id('show_header_form').'" />';
+
+            return $out;
+        }
+
 		/**
 		 * Return html of admin form title
 		 * @param  $data
