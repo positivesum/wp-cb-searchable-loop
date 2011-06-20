@@ -58,7 +58,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Module description
 			$description = $data[$this->get_field_id('description')];
             // Header form
-            $header_form = $data[$this->get_field_name('show_header_form')];
+            $header_form = empty($data[$this->get_field_name('show_header_form')]) ? 'on' : $data[$this->get_field_name('show_header_form')];
 
 			// Page
 			$paged = get_query_var('paged');
@@ -235,7 +235,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
         // Settings for header forms
         private function admin_form_header_form($data) {
             $checked = '';
-            if (!empty($data[$this->get_field_name('show_header_form')])) {
+            if (empty($data[$this->get_field_name('show_header_form')]) || $data[$this->get_field_name('show_header_form')] == 'on') {
                 $checked = 'checked';
             }
 
