@@ -219,8 +219,13 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
         // Settings for header forms
         private function admin_form_header_form($data) {
+            $checked = '';
+            if (!empty($data[$this->get_field_name('show_header_form')])) {
+                $checked = 'checked';
+            }
+
             $out = '<label for="'.$this->id_base.'-show_header_form">Show Header Form: </label>';
-            $out .= '<input type="checkbox" name="'.$this->get_field_id('show_header_form').'" id="'.$this->get_field_id('show_header_form').'" />';
+            $out .= '<input '.$checked.' type="checkbox" name="'.$this->get_field_id('show_header_form').'" id="'.$this->get_field_id('show_header_form').'" />';
 
             return $out;
         }
