@@ -76,7 +76,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Make new Query
             
 			$query_string = array(
-                'posts_per_page'=>'9',
+                'posts_per_page'=>9,
 				'orderby'=>'date',
 				'order'=>'DESC',
 				'paged'=>$paged
