@@ -70,6 +70,13 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$category = get_query_var('category');
 			$category = ($category !== "" ) ? get_query_var('category') : $data[$this->get_field_name('post_category')];
 
+            $cats_children = get_categories(array('child_of' => $category));
+
+            $cats_ex = array();
+            foreach ($cats_children as $cat) {
+                $cats_ex[] = $cat->cat_ID;
+            }
+
 			// Keywords for search
 			$keywords = get_query_var('keywords');
 
@@ -79,7 +86,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                 'posts_per_page=9',
 				'orderby=date',
 				'order=DESC',
-				'paged='.$paged
+				'paged='.$paged,
+                'category__not_in='.implode(',', $cats_ex)
 			);
 			if ($category) {
 				$query_string[] = 'cat='.$category;
