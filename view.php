@@ -22,6 +22,7 @@
 <?php if (!empty($description)): ?>
 	<p class="description"><?php echo $description; ?></p>
 <?php endif; ?>
+<?php if ($header_form == 'on'): ?>
 <div class="cfct-loop-searchable-search-form">
 	<form action="" method="get">
         <?php
@@ -45,7 +46,7 @@
 		<input class="keywords" type="text" name="keywords" value="<?php echo $keywords; ?>"  />
 	</form>
 </div>
-
+<?php endif; ?>
 <?php if ($wp_query->have_posts()): ?>
 	<?php while ($wp_query->have_posts()): ?>
 		<?php $wp_query->the_post(); ?>
