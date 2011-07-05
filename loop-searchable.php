@@ -74,7 +74,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
             $cats_ex = array();
             foreach ($cats_children as $cat) {
-                $cats_ex[] = $cat->cat_ID;
+                $cats_ex[] = -1 *  (int)$cat->cat_ID;
             }
 
 			// Keywords for search
@@ -86,11 +86,11 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                 'posts_per_page=9',
 				'orderby=date',
 				'order=DESC',
-				'paged='.$paged,
-                'category__not_in='.implode(',', $cats_ex)
+				'paged='.$paged
 			);
 			if ($category) {
-				$query_string[] = 'cat='.$category;
+                $cats_ex[] = $category;
+				$query_string[] = 'cat='.implode(',', $cats_ex);
 			}
 			if ($keywords) {
 				$query_string[] = 's='.$keywords;
