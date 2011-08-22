@@ -122,6 +122,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
             // Show header form?
             $out .= $this->admin_form_header_form($data);
+            $out .= $this->admin_form_header_form_dd($data);
 
 			// Post settings (type, category)
 			$out .= $this->admin_form_post_settings($data);
