@@ -58,9 +58,9 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Module description
 			$description = $data[$this->get_field_id('description')];
             // Header form
-            $header_form = empty($data[$this->get_field_name('show_header_form')]) ? 'on' : $data[$this->get_field_name('show_header_form')];
+            $header_form = (isset($data[$this->get_field_name('show_header_form')]) && empty($data[$this->get_field_name('show_header_form')])) ? 'on' : $data[$this->get_field_name('show_header_form')];
             // Header Form DD Categories
-            $header_form_dd = empty($data[$this->get_field_name('show_header_form_dd')]) ? 'on' : $data[$this->get_field_name('show_header_form_dd')];
+            $header_form_dd = (isset($data[$this->get_field_name('show_header_form_dd')]) && empty($data[$this->get_field_name('show_header_form_dd')])) ? 'on' : $data[$this->get_field_name('show_header_form_dd')];
 
 			// Page
 			$paged = get_query_var('paged');
@@ -245,7 +245,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
         // Settings for header forms
         private function admin_form_header_form($data) {
             $checked = '';
-            if (empty($data[$this->get_field_name('show_header_form')]) || $data[$this->get_field_name('show_header_form')] == 'on') {
+            if ((isset($data[$this->get_field_name('show_header_form')]) && empty($data[$this->get_field_name('show_header_form')])) || $data[$this->get_field_name('show_header_form')] == 'on') {
                 $checked = 'checked';
             }
 
@@ -258,8 +258,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
         // Setting for header form categories drop down
         private function admin_form_header_form_dd($data) {
             $checked = '';
-            
-            if (empty($data[$this->get_field_name('show_header_form_dd')]) || $data[$this->get_field_name('show_header_form_dd')] == 'on') {
+
+            if ((isset($data[$this->get_field_name('show_header_form_dd')]) && empty($data[$this->get_field_name('show_header_form_dd')])) || $data[$this->get_field_name('show_header_form_dd')] == 'on') {
                 $checked = 'checked';
             }
 
