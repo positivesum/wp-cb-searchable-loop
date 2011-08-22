@@ -252,6 +252,20 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             return $out;
         }
 
+        // Setting for header form categories drop down
+        private function admin_form_header_form_dd($data) {
+            $checked = '';
+            
+            if (empty($data[$this->get_field_name('show_header_form_dd')]) || $data[$this->get_field_name('show_header_form_dd')] == 'on') {
+                $checked = 'checked';
+            }
+
+            $out = '<label for="'.$this->id_base.'-show_header_form_dd">Show Header Form Categories: </label>';
+            $out .= '<input '.$checked.' type="checkbox" name="'.$this->get_field_id('show_header_form_dd').'" id="'.$this->get_field_id('show_header_form_dd').'" />';
+
+            return $out;
+        }
+
 		/**
 		 * Return html of admin form title
 		 * @param  $data
