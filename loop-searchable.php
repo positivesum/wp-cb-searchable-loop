@@ -144,6 +144,9 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             if (empty($new_data[$this->get_field_name('show_header_form')])) {
                 $new_data[$this->get_field_name('show_header_form')] = 'off';
             }
+            if (empty($new_data[$this->get_field_name('show_header_form_dd')])) {
+                $new_data[$this->get_field_name('show_header_form_dd')] = 'off';
+            }
             return $new_data;
         }
 # Admin Helpers
