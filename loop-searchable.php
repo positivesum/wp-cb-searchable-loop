@@ -59,6 +59,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$description = $data[$this->get_field_id('description')];
             // Header form
             $header_form = empty($data[$this->get_field_name('show_header_form')]) ? 'on' : $data[$this->get_field_name('show_header_form')];
+            // Header Form DD Categories
+            $header_form_dd = empty($data[$this->get_field_name('show_header_form_dd')]) ? 'on' : $data[$this->get_field_name('show_header_form_dd')];
 
 			// Page
 			$paged = get_query_var('paged');
@@ -104,7 +106,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             global $wp_query;
 
 			// Output
-			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords', 'header_form'));
+			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords', 'header_form', 'header_form_dd'));
 		}
 
 # Admin Form
