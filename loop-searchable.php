@@ -78,6 +78,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             $month = get_query_var('month');
 
 			// Current category (set in admin or choose from drop down menu in frontend)
+            $default_category = $data[$this->get_field_name('post_category')];
 			$category = get_query_var('category');
 			$category = ($category !== "" ) ? get_query_var('category') : $data[$this->get_field_name('post_category')];
 
@@ -140,7 +141,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                     'order',
                     'wp_query',
                     'keywords',
-                    'header_form'
+                    'header_form',
+                    'default_category'
                 )
             );
 		}
