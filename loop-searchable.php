@@ -45,23 +45,37 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 		public function query_vars($vars) {
 			$vars[] = 'category';
 			$vars[] = 'keywords';
+            $vars[] = 'year';
+            $vars[] = 'month';
+            $vars[] = 'oby';
 
 			return $vars;
 		}
 
 # Display
 		public function display($data) {
+			global $wp_query, $post, $wpdb, $wp_locale;
 
 			// Module title
 			$title = esc_html($data[$this->get_field_id('title')]);
 			// Module description
 			$description = $data[$this->get_field_id('description')];
+            // Header form
+            $header_form = empty($data[$this->get_field_name('show_header_form')]) ? 'on' : $data[$this->get_field_name('show_header_form')];
 
 			// Page
 			$paged = get_query_var('paged');
 
 			// Category List
 			$categories = $this->get_post_categories();
+
+            // Order param
+            $orderby = get_query_var('oby');
+            $orderby = ($orderby == "") ? $orderby = 'date' : $orderby;
+            // Year
+            $year = get_query_var('year');
+            // Month
+            $month = get_query_var('month');
 
 			// Current category (set in admin or choose from drop down menu in frontend)
 			$category = get_query_var('category');
@@ -71,29 +85,64 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$keywords = get_query_var('keywords');
 
 			// Make new Query
-            
 			$query_string = array(
-				'orderby' => 'date',
-				'order' => 'DESC',
-				'paged' => $paged
+                'posts_per_page=9',
+				'order=DESC',
+				'paged='.$paged
 			);
+            if ($orderby) {
+                $query_string[] = 'orderby='.$orderby;
+            }
+            if ($year) {
+                $query_string[] = 'year='.$year;
+            }
+            if ($month) {
+                $query_string[] = 'monthnum='.$month;
+            }
+
 			if ($category) {
-				$query_string['cat'] = $category;
+				$query_string[] = 'category__in='.$category;
 			}
 			if ($keywords) {
-				$query_string['s'] = $keywords;
+				$query_string[] = 's='.$keywords;
 			}
 			// Make query string
-			//$query_string = implode('&', $query_string);
+			$query_string = implode('&', $query_string);
+
+            // Get available years
+            $_years = $wpdb->get_results( "SELECT YEAR(post_date) as Y FROM $wpdb->posts GROUP BY YEAR(post_date)");
+            $years = array();
+            foreach ($_years as $_year) {
+                $years[] = $_year->Y;
+            }
+            rsort($years);
+            // Generate months array
+            for ( $i = 1; $i < 13; $i = $i +1 ) {
+                $months[] = $wp_locale->get_month_abbrev( $wp_locale->get_month( $i ) );
+            }
 
 			// Make new WP_Query object
 			query_posts($query_string);
-
-            //$wp_query->query($query_string);
-            global $wp_query;
+            $wp_query = $GLOBALS['wp_query'];
 
 			// Output
-			return $this->load_view($data, compact('title', 'description', 'categories', 'wp_query', 'category', 'keywords'));
+			return $this->load_view(
+                $data,
+                compact(
+                    'title',
+                    'description',
+                    'categories',
+                    'category',
+                    'months',
+                    'month',
+                    'years',
+                    'year',
+                    'order',
+                    'wp_query',
+                    'keywords',
+                    'header_form'
+                )
+            );
 		}
 
 # Admin Form
@@ -107,6 +156,9 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Description - textarea
 			$out .= $this->admin_form_description($data);
 
+            // Show header form?
+            $out .= $this->admin_form_header_form($data);
+
 			// Post settings (type, category)
 			$out .= $this->admin_form_post_settings($data);
 
@@ -115,7 +167,20 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 			return $out;
 		}
-
+# Update
+        /**
+         * Update data, standard is to just return the new data
+         *
+         * @param array $new_data
+         * @param array $old_data
+         * @return array
+         */
+        function update($new_data, $old_data) {
+            if (empty($new_data[$this->get_field_name('show_header_form')])) {
+                $new_data[$this->get_field_name('show_header_form')] = 'off';
+            }
+            return $new_data;
+        }
 # Admin Helpers
 		public function admin_text($data) {
 			return strip_tags($data[$this->get_field_name('title')]);
@@ -208,6 +273,23 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 			return $out;
 		}
+
+        // Settings for loop (posts per page, etc)
+        private function admin_form_loop_settings($data) {}
+
+        // Settings for header forms
+        private function admin_form_header_form($data) {
+            $checked = '';
+            if (empty($data[$this->get_field_name('show_header_form')]) || $data[$this->get_field_name('show_header_form')] == 'on') {
+                $checked = 'checked';
+            }
+
+            $out = '<label for="'.$this->id_base.'-show_header_form">Show Header Form: </label>';
+            $out .= '<input '.$checked.' type="checkbox" name="'.$this->get_field_id('show_header_form').'" id="'.$this->get_field_id('show_header_form').'" />';
+
+            return $out;
+        }
+
 		/**
 		 * Return html of admin form title
 		 * @param  $data
