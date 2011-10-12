@@ -48,7 +48,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             $vars[] = 'year';
             $vars[] = 'month';
             $vars[] = 'sort_by';
-            $vars[] = 'order';
+            $vars[] = 'order_by';
 
 			return $vars;
 		}
@@ -74,8 +74,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             $sort_by = get_query_var('sort_by');
             $sort_by = ($sort_by == "") ? $sort_by = 'date' : $sort_by;
 
-            $order = get_query_var('order');
-            $order = ($order == "") ? $order = 'asc' : $order;
+            $order_by = get_query_var('order');
+            $order_by = ($order_by == "") ? $order_by = 'asc' : $order_by;
 
             // Year
             $year = get_query_var('year');
@@ -93,7 +93,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Make new Query
 			$query_string = array(
                 'posts_per_page=9',
-				'order='.$order,
+				'order='.$order_by,
 				'paged='.$paged
 			);
             if ($sort_by) {
@@ -143,7 +143,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                     'month',
                     'years',
                     'year',
-                    'order',
+                    'order_by',
                     'sort_by',
                     'wp_query',
                     'keywords',
