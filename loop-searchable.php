@@ -47,7 +47,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$vars[] = 'keywords';
             $vars[] = 'year';
             $vars[] = 'month';
-            $vars[] = 'oby';
+            $vars[] = 'sort_by';
+            $vars[] = 'order';
 
 			return $vars;
 		}
@@ -70,8 +71,12 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			$categories = $this->get_post_categories();
 
             // Order param
-            $orderby = get_query_var('oby');
-            $orderby = ($orderby == "") ? $orderby = 'date' : $orderby;
+            $sort_by = get_query_var('sort_by');
+            $sort_by = ($sort_by == "") ? $sort_by = 'date' : $sort_by;
+
+            $order = get_query_var('order');
+            $order = ($order == "") ? $order = 'asc' : $order;
+
             // Year
             $year = get_query_var('year');
             // Month
@@ -88,11 +93,11 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Make new Query
 			$query_string = array(
                 'posts_per_page=9',
-				'order=DESC',
+				'order='.$order,
 				'paged='.$paged
 			);
-            if ($orderby) {
-                $query_string[] = 'orderby='.$orderby;
+            if ($sort_by) {
+                $query_string[] = 'orderby='.$sort_by;
             }
             if ($year) {
                 $query_string[] = 'year='.$year;
@@ -139,6 +144,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                     'years',
                     'year',
                     'order',
+                    'sort_by',
                     'wp_query',
                     'keywords',
                     'header_form',
