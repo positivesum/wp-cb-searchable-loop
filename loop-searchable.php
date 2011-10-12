@@ -77,6 +77,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             $order_by = get_query_var('order_by');
             $order_by = ($order_by == "") ? $order_by = 'asc' : $order_by;
 
+            echo '<h1>'.$order_by.'</h1>';
+
             // Year
             $year = get_query_var('year');
             // Month
@@ -93,7 +95,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Make new Query
 			$query_string = array(
                 'posts_per_page=9',
-				'order='.$order_by,
+				'order='.strtoupper($order_by),
 				'paged='.$paged
 			);
             if ($sort_by) {
