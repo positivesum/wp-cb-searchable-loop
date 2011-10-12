@@ -132,6 +132,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Make new WP_Query object
 			query_posts($query_string);
             $wp_query = $GLOBALS['wp_query'];
+            // Reset Post Data
+            wp_reset_postdata();
 
 			// Output
 			return $this->load_view(
