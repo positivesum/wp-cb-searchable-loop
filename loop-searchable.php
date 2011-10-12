@@ -77,7 +77,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             $order_by = get_query_var('order_by');
             $order_by = ($order_by == "") ? $order_by = 'asc' : $order_by;
 
-            echo '<h1>'.$order_by.'</h1>';
+
 
             // Year
             $year = get_query_var('year');
