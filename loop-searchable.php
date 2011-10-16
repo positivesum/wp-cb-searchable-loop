@@ -129,6 +129,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                 $months[] = $wp_locale->get_month_abbrev( $wp_locale->get_month( $i ) );
             }
 
+            print_r($query_string); exit;
+
 			// Make new WP_Query object
 			query_posts($query_string);
             $wp_query = $GLOBALS['wp_query'];
