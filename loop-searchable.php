@@ -80,7 +80,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 
             // Year
-            $year = get_query_var('year');
+            $year = get_query_var('_year');
             // Month
             $month = get_query_var('month');
 
