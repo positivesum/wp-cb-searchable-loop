@@ -45,7 +45,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 		public function query_vars($vars) {
 			$vars[] = 'category';
 			$vars[] = 'keywords';
-            $vars[] = 'year';
+            $vars[] = '_year';
             $vars[] = 'month';
             $vars[] = 'sort_by';
             $vars[] = 'order_by';
