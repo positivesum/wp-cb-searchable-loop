@@ -80,7 +80,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 
 
             // Year
-            $year = get_query_var('_year');
+            $_year = get_query_var('_year');
             // Month
             $month = get_query_var('month');
 
@@ -101,8 +101,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             if ($sort_by) {
                 $query_string[] = 'orderby='.$sort_by;
             }
-            if ($year) {
-                $query_string[] = 'year='.$year;
+            if ($_year) {
+                $query_string[] = 'year='.$_year;
             }
             if ($month) {
                 $query_string[] = 'monthnum='.$month;
@@ -146,7 +146,7 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
                     'months',
                     'month',
                     'years',
-                    'year',
+                    '_year',
                     'order_by',
                     'sort_by',
                     'wp_query',
