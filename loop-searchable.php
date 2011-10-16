@@ -120,8 +120,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
             // Get available years
             $_years = $wpdb->get_results( "SELECT YEAR(post_date) as Y FROM $wpdb->posts GROUP BY YEAR(post_date)");
             $years = array();
-            foreach ($_years as $_year) {
-                $years[] = $_year->Y;
+            foreach ($_years as $__year) {
+                $years[] = $__year->Y;
             }
             rsort($years);
             // Generate months array
