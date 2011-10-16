@@ -30,6 +30,8 @@ if (!class_exists('cfct_module_loop_searchable') && class_exists('cfct_build_mod
 			// Will suppress the module edit button in the admin module display
 			# $this->editable = false
 
+            remove_action('template_redirect','redirect_canonical');
+
 			parent::__construct('cfct-loop-searchable', __('Searchable Loop', 'carrington-build'), $opts);
 		}
 
